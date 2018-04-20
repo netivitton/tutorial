@@ -19,24 +19,36 @@
     </StackLayout>
     <StackLayout tkMainContent>
             <TabView selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
-                    <StackLayout *tabItem="{title: 'NativeScript'}">
-                        <Label text="NativeScript" class="m-15 h2 text-left" color="blue"></Label>
+                    <StackLayout *tabItem="{title: 'Home'}">
+                        <Label text="Home" class="m-15 h2 text-left" color="blue"></Label>
                         <ScrollView>
                             <Label [text]="content" textWrap="true" class="m-15"></Label>
                         </ScrollView>
                     </StackLayout>
-                    <StackLayout *tabItem="{title: 'Icon'}">
+                    <StackLayout *tabItem="{title: 'Profile'}">
                             <ScrollView>
-                                    <GridLayout rows="auto,auto,auto,auto,*" columns="*,*,*,*,*,*,*,*">
+                                    <GridLayout rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
                                             <Image row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="1" col="0" colSpan="2" text="ชื่อ"></label>
-                                            <TextField row="1" col="2" colSpan="5" [text]="name"></TextField>
+                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}" row="1" col="2" colSpan="5" [text]="name"></TextField>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="1" col="2" colSpan="5" [text]="name"></label>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="2" col="0" colSpan="2" text="นามสกุล"></label>
-                                            <TextField row="2" col="2" colSpan="5" [text]="lastname"></TextField>
-                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="ตำแหน่ง"></label>
-                                            <TextField row="3" col="2" colSpan="5" text=""></TextField>
-                                            <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="การศึกษา"></label>
-                                            <TextView row="4" col="2" colSpan="5" text=""></TextView>
+                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="2" col="2" colSpan="5" [text]="lastname"></TextField>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="2" col="2" colSpan="5" [text]="lastname"></label>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="แนะนำตัว"></label>
+                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="3" col="2" colSpan="5" [text]="introduce"></TextField>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="3" col="2" colSpan="5" [text]="introduce"></label>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="ที่อยู่"></label>
+                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="4" col="2" colSpan="5" [text]="address"></TextView>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="4" col="2" colSpan="5" [text]="address"></label>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="5" col="0" colSpan="2" text="ตำแหน่ง"></label>
+                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="5" col="2" colSpan="5" text=""></TextView>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="5" col="2" colSpan="5" text=""></label>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="6" col="0" colSpan="2" text="การศึกษา"></label>
+                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="6" col="2" colSpan="5" text=""></TextView>
+                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="6" col="2" colSpan="5" text=""></label>
+                                            <Button row="7" col="2" colSpan="5" [text]="status" (tap)="action()"></Button>
+                                            
                                       </GridLayout>
                             </ScrollView>
                     </StackLayout>

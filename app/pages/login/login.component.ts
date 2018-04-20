@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
     login(){
-		// this.extractData();
+		this.extractData();
         this.routerExtensions.navigate(["/profile"],{ clearHistory: true });
 	}
 
