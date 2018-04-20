@@ -1,0 +1,24 @@
+@import "~nativescript-theme-core/css/core.light.css";
+
+ActionBar{
+    text-align: center;
+    background-color: #ffc61a;
+    color: white;
+    /* font: bold; */
+  }
+  Page {
+    background-color: white;
+    font-size: 15;
+  }
+  TextField,TextView {
+    padding: 8 15 8 15;
+  /* height: 40;  */
+  background-color: #ffdf80;
+  font-size: 15px;
+  border-width:1px  ;
+  border-color:#ffe699;
+  /* padding: 10; */
+  /* font-size: 15; */
+  border-radius: 15px;
+  margin: 15px 30px 15px 30px;
+  }

@@ -1,0 +1,46 @@
+<ActionBar title="Tutorial">
+        <ActionItem *ngIf="ios" icon="~/images/newmenu.png" ios.position="left" (tap)="openDrawer()"></ActionItem>
+        <NavigationButton *ngIf="!ios" icon="~/images/newmenu.png" (tap)="openDrawer()"></NavigationButton>
+    </ActionBar>
+<RadSideDrawer tkExampleTitle tkToggleNavButton (drawerOpened)="onDrawerOpened($event)"
+(drawerClosed)="onDrawerClosed($event)" >
+    <StackLayout tkDrawerContent class="sideStackLayout">
+        <StackLayout class="sideTitleStackLayout">
+            <Label text="Tutorial"></Label>
+        </StackLayout>
+            <GridLayout class="sideStackLayout" rows="auto, auto , auto,auto,auto" columns="*,*,*,*,*,*,*,*">
+                    <StackLayout class="borderLayout" row="0" col="1" colSpan="6">
+                    <Image  src="~/images/logofreewill.png"></Image>
+                    <Label class="sideLabel"  horizontalAlignment="center" [text]="'ชื่อ '+ name+'   '+lastname"></Label>
+                </StackLayout>
+                <Label class="sideLabel" text="เปลี่ยนรหัสผ่าน" col="1" colSpan="4" row="3"></Label>
+                <Label class="sideLabel" text="ออกจากระบบ" col="1" colSpan="4" row="4" [nsRouterLink]="['/']"></Label>
+            </GridLayout>
+    </StackLayout>
+    <StackLayout tkMainContent>
+            <TabView selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
+                    <StackLayout *tabItem="{title: 'NativeScript'}">
+                        <Label text="NativeScript" class="m-15 h2 text-left" color="blue"></Label>
+                        <ScrollView>
+                            <Label [text]="content" textWrap="true" class="m-15"></Label>
+                        </ScrollView>
+                    </StackLayout>
+                    <StackLayout *tabItem="{title: 'Icon'}">
+                            <ScrollView>
+                                    <GridLayout rows="auto,auto,auto,auto,*" columns="*,*,*,*,*,*,*,*">
+                                            <Image row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="1" col="0" colSpan="2" text="ชื่อ"></label>
+                                            <TextField row="1" col="2" colSpan="5" [text]="name"></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="2" col="0" colSpan="2" text="นามสกุล"></label>
+                                            <TextField row="2" col="2" colSpan="5" [text]="lastname"></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="ตำแหน่ง"></label>
+                                            <TextField row="3" col="2" colSpan="5" text=""></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="การศึกษา"></label>
+                                            <TextView row="4" col="2" colSpan="5" text=""></TextView>
+                                      </GridLayout>
+                            </ScrollView>
+                    </StackLayout>
+                </TabView>
+
+    </StackLayout>
+</RadSideDrawer>

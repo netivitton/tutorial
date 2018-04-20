@@ -1,0 +1,13 @@
+
+<GridLayout rows="auto,auto, auto, auto, auto,auto,auto" columns="*,*,*,*,*,*">
+    <Image row="0" colSpan="6" src="~/images/logofreewill.png"></Image>
+    
+    <Label row="1" col="1" colSpan="4" text="Email" textWrap="true"></Label>
+
+    <TextField row="2" col="1" colSpan="4" hint="" [(ngModel)]="email"></TextField>
+    <Label row="3" col="1"  text="Password" colSpan="2" textWrap="true"></Label>
+    <TextField row="4" col="1"  colSpan="4" secure="true" hint="" [(ngModel)]="password"></TextField>
+
+
+    <button row="5" col="1" colSpan="4" text="login" (tap)="login()"></button>
+</GridLayout>

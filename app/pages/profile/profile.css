@@ -1,0 +1,40 @@
+button {
+    font-size: 15;
+    horizontal-align: center;
+}
+
+.drawerContentText {
+    font-size: 13;
+    padding: 10;
+}
+
+.drawerContentButton {
+    margin: 10;
+    horizontal-align: left;
+}
+
+.sideStackLayout {
+    background-color: #fff2cc;
+}
+
+.sideTitleStackLayout {
+    height: 56;
+    text-align: center;
+    vertical-align: center;
+}
+
+.sideLabel {
+    padding: 10;
+}
+
+.sideLightBlueLabel {
+    background-color: #ffe699;
+}
+
+.borderLayout{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: gray; 
+    border-width:1px ;
+    margin: 5;
+    /* border-radius: 15px; */
+  }
