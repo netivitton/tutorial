@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router"
 import { Http, Headers, RequestOptions } from "@angular/http";
 import "rxjs/add/operator/map";
 import { CallAPI } from "../services/callAPI.services"
+import { setString } from "application-settings"
 @Component({
 	moduleId: module.id,
 	selector: 'login',
@@ -14,8 +15,8 @@ import { CallAPI } from "../services/callAPI.services"
 })
 
 export class LoginComponent implements OnInit {
-	email;
-	password;
+	email = "mail@freewill.comxxxxxxxx";
+	password = "password";
 	message;
 	public host: string;
     public userAgent: string;
@@ -27,18 +28,23 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
     login(){
-		this.extractData();
-        this.routerExtensions.navigate(["/profile"],{ clearHistory: true });
+		this.extractData("login",{
+			"email":this.email,
+			"password": this.password
+		   });
+       
 	}
 
 	
 
-	extractData() {
-        this.mycallAPI.getData()
+	extractData(url,data) {
+        this.mycallAPI.postData(url,data)
             .subscribe((result) => {
-                console.log(result);
+				setString("bean",JSON.stringify(result));
+				this.routerExtensions.navigate(["/profile"],{ clearHistory: true });
             }, (error) => {
-               
+				
+				console.log(error);
             });
     }
 }

@@ -8,51 +8,50 @@
         <StackLayout class="sideTitleStackLayout">
             <Label text="Tutorial"></Label>
         </StackLayout>
-            <GridLayout class="sideStackLayout" rows="auto, auto , auto,auto,auto" columns="*,*,*,*,*,*,*,*">
+            <GridLayout class="sideStackLayout" rows="auto, auto , auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
                     <StackLayout class="borderLayout" row="0" col="1" colSpan="6">
                     <Image  src="~/images/logofreewill.png"></Image>
                     <Label class="sideLabel"  horizontalAlignment="center" [text]="'ชื่อ '+ name+'   '+lastname"></Label>
                 </StackLayout>
-                <Label class="sideLabel" text="เปลี่ยนรหัสผ่าน" col="1" colSpan="4" row="3"></Label>
-                <Label class="sideLabel" text="ออกจากระบบ" col="1" colSpan="4" row="4" [nsRouterLink]="['/']"></Label>
+                <Label class="sideLabel" text="รายชื่อ" col="1" colSpan="4" row="3" [nsRouterLink]="['list']"></Label>
+                <Label class="sideLabel" text="เปลี่ยนรหัสผ่าน" col="1" colSpan="4" row="4"></Label>
+                <Label class="sideLabel" text="ออกจากระบบ" col="1" colSpan="4" row="5" (tap)="logout();"></Label>
             </GridLayout>
     </StackLayout>
     <StackLayout tkMainContent>
-            <TabView selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
-                    <StackLayout *tabItem="{title: 'Home'}">
-                        <Label text="Home" class="m-15 h2 text-left" color="blue"></Label>
-                        <ScrollView>
-                            <Label [text]="content" textWrap="true" class="m-15"></Label>
-                        </ScrollView>
-                    </StackLayout>
-                    <StackLayout *tabItem="{title: 'Profile'}">
                             <ScrollView>
-                                    <GridLayout rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
-                                            <Image row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
+                                    <GridLayout *ngIf="!editStatus"  rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
+                                            <Image  row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="1" col="0" colSpan="2" text="ชื่อ"></label>
-                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}" row="1" col="2" colSpan="5" [text]="name"></TextField>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="1" col="2" colSpan="5" [text]="name"></label>
+                                            <label  row="1" col="2" colSpan="5" [text]="name"></label>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="2" col="0" colSpan="2" text="นามสกุล"></label>
-                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="2" col="2" colSpan="5" [text]="lastname"></TextField>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="2" col="2" colSpan="5" [text]="lastname"></label>
-                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="แนะนำตัว"></label>
-                                            <TextField visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="3" col="2" colSpan="5" [text]="introduce"></TextField>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="3" col="2" colSpan="5" [text]="introduce"></label>
+                                            <label row="2" col="2" colSpan="5" [text]="lastname"></label>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="แนะนำตัวเอง"></label>
+                                            <label row="3" col="2" colSpan="5" [text]="introduce"></label>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="ที่อยู่"></label>
-                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="4" col="2" colSpan="5" [text]="address"></TextView>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="4" col="2" colSpan="5" [text]="address"></label>
+                                            <label row="4" col="2" colSpan="5" [text]="address"></label>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="5" col="0" colSpan="2" text="ตำแหน่ง"></label>
-                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="5" col="2" colSpan="5" text=""></TextView>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="5" col="2" colSpan="5" text=""></label>
-                                            <label horizontalAlignment="right" verticalAlignment="center" row="6" col="0" colSpan="2" text="การศึกษา"></label>
-                                            <TextView visibility="{{ editStatus ? 'visible' : 'collapsed' }}"  row="6" col="2" colSpan="5" text=""></TextView>
-                                            <label visibility="{{ !editStatus ? 'visible' : 'collapsed' }}"  row="6" col="2" colSpan="5" text=""></label>
-                                            <Button row="7" col="2" colSpan="5" [text]="status" (tap)="action()"></Button>
+                                            <label row="5" col="2" colSpan="5" [text]="titlename"></label>
+                                            <Button row="6" col="2" colSpan="5" text="แก้ไข" (tap)="action()"></Button>
+                                            
+                                      </GridLayout>
+                                    <GridLayout *ngIf="editStatus"  rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
+                                            <Image  row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="1" col="0" colSpan="2" text="ชื่อ"></label>
+                                            <TextField  row="1" col="2" colSpan="5" [text]="name"></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="2" col="0" colSpan="2" text="นามสกุล"></label>
+                                            <TextField row="2" col="2" colSpan="5" [text]="lastname"></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="แนะนำตัวเอง"></label>
+                                            <TextField row="3" col="2" colSpan="5" [text]="introduce"></TextField>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="ที่อยู่"></label>
+                                            <TextView row="4" col="2" colSpan="5" [text]="address"></TextView>
+                                            <label horizontalAlignment="right" verticalAlignment="center" row="5" col="0" colSpan="2" text="ตำแหน่ง"></label>
+                                            <TextView row="5" col="2" colSpan="5" [text]="titlename"></TextView>
+                                            <Button row="6" col="2" colSpan="5" text="ยืนยันข้อมูล" (tap)="action()"></Button>
                                             
                                       </GridLayout>
                             </ScrollView>
-                    </StackLayout>
-                </TabView>
+
 
     </StackLayout>
 </RadSideDrawer>

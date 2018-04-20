@@ -7,7 +7,8 @@ import { isIOS } from "platform";
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { TabView, SelectedIndexChangedEventData, TabViewItem } from "ui/tab-view";
 import { CallAPI } from "../services/callAPI.services"
-
+import { getString,clear } from "application-settings"
+import { RouterExtensions } from "nativescript-angular/router" 
 @Component({
     moduleId: module.id,
     selector: 'profile',
@@ -24,11 +25,12 @@ export class ProfileComponent implements AfterViewInit, OnInit {
     pic_profile = "";
     address = "";
     introduce = "";
-
+    titlename = ""
     editStatus = false;
     statusDrawer = true;
     status = "แก้ไข";
-    constructor(private _changeDetectionRef: ChangeDetectorRef, private mycallAPI: CallAPI) {
+    bean;
+    constructor(private routerExtensions: RouterExtensions,private _changeDetectionRef: ChangeDetectorRef, private mycallAPI: CallAPI) {
         this.ios = isIOS;
     }
 
@@ -82,7 +84,8 @@ export class ProfileComponent implements AfterViewInit, OnInit {
     }
 
     extractData() {
-        this.mycallAPI.getData()
+        this.bean = JSON.parse(getString("bean"));
+        this.mycallAPI.getData("users/"+this.bean.userId)
             .subscribe((result) => {
                 console.log(result);
                 this.name = result.firstname;
@@ -90,6 +93,7 @@ export class ProfileComponent implements AfterViewInit, OnInit {
                 this.pic_profile = result.pic_profile;
                 this.address = result.address;
                 this.introduce = result.introduce;
+                this.titlename = result.titlename;
             }, (error) => {
 
             });
@@ -97,13 +101,32 @@ export class ProfileComponent implements AfterViewInit, OnInit {
 
     action() {
         if (this.editStatus) {
-            this.status = "ยืนยันข้อมูล"
-            this.editStatus = true;
-        } else {
+            this.mycallAPI.putData("users/"+this.bean.userId,{
+                "firstname" : this.name,
+                "lastname" : this.lastname,
+                "address" : this.address,
+                "introduce" : this.introduce,
+                "titlename" : this.titlename
+            })
+            .subscribe((result) => {
+                console.log(result);
+  
+            }, (error) => {
+
+            });
             this.status = "แก้ไข"
-            this.editStatus = false;
+            this.editStatus = !this.editStatus;
+            console.log(this.editStatus)
+        } else {
+            this.status = "ยืนยันข้อมูล"
+            this.editStatus = !this.editStatus;
+            console.log("con : "+this.editStatus)
         }
 
+    }
+    logout(){
+        clear();
+        this.routerExtensions.navigate(["/"],{ clearHistory: true });
     }
 
 }
