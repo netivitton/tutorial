@@ -112,7 +112,7 @@ export class ProfileComponent implements AfterViewInit, OnInit {
                 console.log(result);
   
             }, (error) => {
-
+                console.log(error);
             });
             this.status = "แก้ไข"
             this.editStatus = !this.editStatus;

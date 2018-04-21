@@ -38,15 +38,15 @@
                                     <GridLayout *ngIf="editStatus"  rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,*,*,*,*,*,*,*">
                                             <Image  row="0" col="1" colSpan="6" src="~/images/logofreewill.png"></Image>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="1" col="0" colSpan="2" text="ชื่อ"></label>
-                                            <TextField  row="1" col="2" colSpan="5" [text]="name"></TextField>
+                                            <TextField  row="1" col="2" colSpan="5" [(ngModel)]="name"></TextField>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="2" col="0" colSpan="2" text="นามสกุล"></label>
-                                            <TextField row="2" col="2" colSpan="5" [text]="lastname"></TextField>
+                                            <TextField row="2" col="2" colSpan="5" [(ngModel)]="lastname"></TextField>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="3" col="0" colSpan="2" text="แนะนำตัวเอง"></label>
-                                            <TextField row="3" col="2" colSpan="5" [text]="introduce"></TextField>
+                                            <TextField row="3" col="2" colSpan="5" [(ngModel)]="introduce"></TextField>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="4" col="0" colSpan="2" text="ที่อยู่"></label>
-                                            <TextView row="4" col="2" colSpan="5" [text]="address"></TextView>
+                                            <TextView row="4" col="2" colSpan="5" [(ngModel)]="address"></TextView>
                                             <label horizontalAlignment="right" verticalAlignment="center" row="5" col="0" colSpan="2" text="ตำแหน่ง"></label>
-                                            <TextView row="5" col="2" colSpan="5" [text]="titlename"></TextView>
+                                            <TextView row="5" col="2" colSpan="5" [(ngModel)]="titlename"></TextView>
                                             <Button row="6" col="2" colSpan="5" text="ยืนยันข้อมูล" (tap)="action()"></Button>
                                             
                                       </GridLayout>
